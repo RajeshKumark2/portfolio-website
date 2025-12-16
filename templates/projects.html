@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Projects - {{ data.personal_info.name }}{% endblock %}
+
+{% block content %}
+<!-- Projects Header -->
+<section class="py-5 mt-5">
+    <div class="container">
+        <h1 class="text-center mb-1">My Projects</h1>
+        <p class="text-center text-muted mb-5">A showcase of my Python development projects</p>
+    </div>
+</section>
+
+<!-- Projects Grid -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            {% for project in data.projects %}
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100 shadow">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h4 class="card-title text-primary">{{ project.title }}</h4>
+                            <span class="badge bg-primary">Project {{ loop.index }}</span>
+                        </div>
+                        
+                        <p class="card-text mb-3">{{ project.description }}</p>
+                        
+                        <h6 class="mb-2">Key Features:</h6>
+                        <ul class="mb-3">
+                            {% for detail in project.details %}
+                            <li>{{ detail }}</li>
+                            {% endfor %}
+                        </ul>
+                        
+                        <h6 class="mb-2">Technologies Used:</h6>
+                        <div class="mb-3">
+                            {% for tech in project.technologies %}
+                            <span class="badge bg-secondary me-1 mb-1">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="mt-auto">
+                            <a href="{{ project.github_link }}" class="btn btn-outline-primary" target="_blank">
+                                <i class="bi bi-github me-1"></i>View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5">
+    <div class="container text-center">
+        <h2 class="mb-4">Interested in my work?</h2>
+        <p class="lead mb-4">I'm always open to discussing new opportunities and interesting projects.</p>
+        <a href="{{ url_for('contact') }}" class="btn btn-primary btn-lg">
+            <i class="bi bi-chat-dots me-2"></i>Let's Connect
+        </a>
+    </div>
+</section>
+{% endblock %}
